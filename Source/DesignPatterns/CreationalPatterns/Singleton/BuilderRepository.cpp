@@ -3,9 +3,9 @@
 
 #include "BuilderRepository.h"
 #include "CreationalPatterns/AbstractFactory/CollectableItem.h"
-#include "CreationalPatterns/AbstractFactory/EquipItem.h"
+#include "CreationalPatterns/AbstractFactory/FirstAidItem.h"
 #include "CreationalPatterns/AbstractFactory/QuestItem.h"
-#include "CreationalPatterns/Builder/EquipItemBuilder.h"
+#include "CreationalPatterns/Builder/FirstAidBuilder.h"
 #include "CreationalPatterns/Builder/ItemBuilder.h"
 #include "CreationalPatterns/Builder/QuestItemBuilder.h"
 
@@ -35,8 +35,8 @@ void UBuilderRepository::Initialize()
 	if(Initialized) return;
 	
 	//TODO: Add all builders
-	ItemBuilders.Add(AEquipItem::StaticClass(),NewObject<UEquipItemBuilder>(this));
 	ItemBuilders.Add(AQuestItem::StaticClass(), NewObject<UQuestItemBuilder>(this));
+	ItemBuilders.Add(AFirstAidItem::StaticClass(), NewObject<UFirstAidBuilder>(this));
 
 	Initialized = true;
 }

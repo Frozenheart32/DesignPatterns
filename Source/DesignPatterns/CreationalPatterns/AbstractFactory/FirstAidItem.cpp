@@ -1,49 +1,50 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "QuestItem.h"
+#include "FirstAidItem.h"
 
-#include "Engine/World.h"
+#include "DesignPatternsCharacter.h"
 
 
 // Sets default values
-AQuestItem::AQuestItem()
+AFirstAidItem::AFirstAidItem()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
 // Called when the game starts or when spawned
-void AQuestItem::BeginPlay()
+void AFirstAidItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void AQuestItem::Tick(float DeltaTime)
+void AFirstAidItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-void AQuestItem::GiveUp(AActor* Actor)
+void AFirstAidItem::GiveUp(AActor* Actor)
 {
-	if(!MissionID.IsNone())
+	auto Player = Cast<ADesignPatternsCharacter>(Actor);
+	if(Player)
 	{
-		//TODO: Notify QuestManager about GiveUp quest item
+		//TODO:Call heal method from HealthComponent
 	}
 }
 
-UObject* AQuestItem::Clone()
+UObject* AFirstAidItem::Clone()
 {
 	FVector SpawnLocation = GetActorLocation() + FVector{0,0,1};
 	FRotator SpawnRotation = GetActorRotation();
 	FActorSpawnParameters SpawnParameters;
 	
 	SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	auto NewQuestItem = GetWorld()->SpawnActor<AQuestItem>(SpawnLocation, SpawnRotation, SpawnParameters);
-	NewQuestItem->MissionID = this->MissionID;
+	auto NewFirstAid = GetWorld()->SpawnActor<AFirstAidItem>(SpawnLocation, SpawnRotation, SpawnParameters);
+	NewFirstAid->HealValue = this->HealValue;
 	
-	return NewQuestItem;
+	return NewFirstAid;
 }
 

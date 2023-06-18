@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CollectableItem.h"
-#include "EquipItem.generated.h"
+#include "ItemBuilder.h"
+#include "FirstAidBuilder.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class DESIGNPATTERNS_API AEquipItem : public ACollectableItem
+class DESIGNPATTERNS_API UFirstAidBuilder : public UItemBuilder
 {
 	GENERATED_BODY()
 };

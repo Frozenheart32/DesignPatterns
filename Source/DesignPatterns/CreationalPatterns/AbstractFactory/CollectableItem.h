@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CreationalPatterns/Prototype/CanClone.h"
 #include "GameFramework/Actor.h"
 #include "CollectableItem.generated.h"
 
-UCLASS()
-class DESIGNPATTERNS_API ACollectableItem : public AActor
+UCLASS(Abstract)
+class DESIGNPATTERNS_API ACollectableItem : public AActor, public ICanClone
 {
 	GENERATED_BODY()
 
@@ -22,4 +23,6 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	virtual void GiveUp(AActor* Actor) PURE_VIRTUAL(ACollectableItem::GiveUp,);
 };

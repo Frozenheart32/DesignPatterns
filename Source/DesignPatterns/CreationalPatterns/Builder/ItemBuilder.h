@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Abstract)
 class DESIGNPATTERNS_API UItemBuilder : public UObject
 {
 	GENERATED_BODY()

@@ -10,7 +10,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Abstract)
 class DESIGNPATTERNS_API UItemFactory : public UObject
 {
 	GENERATED_BODY()

@@ -4,24 +4,24 @@
 
 #include "CoreMinimal.h"
 #include "CollectableItem.h"
-#include "QuestItem.generated.h"
+#include "FirstAidItem.generated.h"
 
 UCLASS()
-class DESIGNPATTERNS_API AQuestItem : public ACollectableItem
+class DESIGNPATTERNS_API AFirstAidItem : public ACollectableItem
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	AQuestItem();
+	AFirstAidItem();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
-	
-	FName MissionID;
+
+	float HealValue = 0.f;
 
 public:
 	// Called every frame
