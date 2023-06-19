@@ -6,6 +6,7 @@
 #include "CollectableItem.h"
 #include "FirstAidItem.generated.h"
 
+
 UCLASS()
 class DESIGNPATTERNS_API AFirstAidItem : public ACollectableItem
 {
@@ -22,6 +23,7 @@ protected:
 private:
 
 	float HealValue = 0.f;
+	bool IsInitialized = false;
 
 public:
 	// Called every frame
@@ -29,4 +31,7 @@ public:
 
 	virtual void GiveUp(AActor* Actor) override;
 	virtual UObject* Clone() override;
+
+	UFUNCTION(BlueprintCallable)
+	void InitializeItem(UStaticMesh* Mesh, UMaterialInterface* Material, const float& Heal);
 };

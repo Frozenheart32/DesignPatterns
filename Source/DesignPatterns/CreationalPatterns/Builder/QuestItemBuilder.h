@@ -13,4 +13,8 @@ UCLASS()
 class DESIGNPATTERNS_API UQuestItemBuilder : public UItemBuilder
 {
 	GENERATED_BODY()
+
+public:
+
+	virtual ACollectableItem* Build(const FVector& Position, const FRotator& Rotation) override;
 };

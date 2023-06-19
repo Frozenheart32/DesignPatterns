@@ -20,9 +20,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UStaticMeshComponent* StaticMeshComponent = nullptr;
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
 	virtual void GiveUp(AActor* Actor) PURE_VIRTUAL(ACollectableItem::GiveUp,);
 };

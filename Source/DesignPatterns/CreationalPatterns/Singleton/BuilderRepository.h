@@ -8,6 +8,7 @@
 
 class UItemBuilder;
 class ACollectableItem;
+class UMyGameInstance;
 
 /**
  * 
@@ -34,7 +35,7 @@ public:
 
 
 	UFUNCTION(BlueprintCallable, Category = "Builder Repository")
-	void Initialize();
+	void Initialize(UMyGameInstance* MyGameInstance);
 	UFUNCTION(BlueprintCallable, Category = "Builder Repository")
 	UItemBuilder* TryGetItemBuilder(TSubclassOf<ACollectableItem> ItemType, bool& Result);
 };

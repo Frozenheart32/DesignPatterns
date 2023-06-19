@@ -3,24 +3,34 @@
 
 #include "ItemSpawner.h"
 
+#include "Core/MyGameInstance.h"
+
 
 // Sets default values
 AItemSpawner::AItemSpawner()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 }
 
 // Called when the game starts or when spawned
 void AItemSpawner::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	SpawnItem();
 }
 
 // Called every frame
 void AItemSpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void AItemSpawner::SpawnItem()
+{
+	auto MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	if(MyGI)
+		MyGI->GetItemFactory()->CreateItem(ItemType, GetActorLocation(), GetActorRotation());
 }
 

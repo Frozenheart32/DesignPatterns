@@ -4,13 +4,14 @@
 #include "FirstAidItem.h"
 
 #include "DesignPatternsCharacter.h"
+#include "CreationalPatterns/AbstractFactory/ItemInfo.h"
 
 
 // Sets default values
-AFirstAidItem::AFirstAidItem()
+AFirstAidItem::AFirstAidItem() : ACollectableItem()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 }
 
 // Called when the game starts or when spawned
@@ -43,8 +44,19 @@ UObject* AFirstAidItem::Clone()
 	
 	SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	auto NewFirstAid = GetWorld()->SpawnActor<AFirstAidItem>(SpawnLocation, SpawnRotation, SpawnParameters);
-	NewFirstAid->HealValue = this->HealValue;
+	NewFirstAid->InitializeItem(StaticMeshComponent->GetStaticMesh(), StaticMeshComponent->GetMaterial(0), HealValue);
 	
 	return NewFirstAid;
+}
+
+void AFirstAidItem::InitializeItem(UStaticMesh* Mesh, UMaterialInterface* Material, const float& Heal)
+{
+	if(IsInitialized) return;
+
+	StaticMeshComponent->SetStaticMesh(Mesh);
+	StaticMeshComponent->SetMaterial(0, Material);
+	HealValue = Heal;
+
+	IsInitialized = true;
 }
 

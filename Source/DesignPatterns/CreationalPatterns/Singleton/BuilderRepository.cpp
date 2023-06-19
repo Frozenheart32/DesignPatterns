@@ -2,6 +2,8 @@
 
 
 #include "BuilderRepository.h"
+
+#include "Core/MyGameInstance.h"
 #include "CreationalPatterns/AbstractFactory/CollectableItem.h"
 #include "CreationalPatterns/AbstractFactory/FirstAidItem.h"
 #include "CreationalPatterns/AbstractFactory/QuestItem.h"
@@ -30,13 +32,17 @@ void UBuilderRepository::DestroyBuilderRepository()
 	}
 }
 
-void UBuilderRepository::Initialize()
+void UBuilderRepository::Initialize(UMyGameInstance* MyGameInstance)
 {
 	if(Initialized) return;
 	
-	//TODO: Add all builders
-	ItemBuilders.Add(AQuestItem::StaticClass(), NewObject<UQuestItemBuilder>(this));
-	ItemBuilders.Add(AFirstAidItem::StaticClass(), NewObject<UFirstAidBuilder>(this));
+	auto QuestItemBuilder = NewObject<UQuestItemBuilder>(MyGameInstance->GetWorld());
+	QuestItemBuilder->Init(MyGameInstance);
+	ItemBuilders.Add(AQuestItem::StaticClass(), QuestItemBuilder);
+	
+	auto FirstAidBuilder = NewObject<UFirstAidBuilder>(MyGameInstance->GetWorld());
+	FirstAidBuilder->Init(MyGameInstance);
+	ItemBuilders.Add(AFirstAidItem::StaticClass(), FirstAidBuilder);
 
 	Initialized = true;
 }

@@ -3,14 +3,15 @@
 
 #include "QuestItem.h"
 
+#include "Components/StaticMeshComponent.h"
 #include "Engine/World.h"
 
 
 // Sets default values
-AQuestItem::AQuestItem()
+AQuestItem::AQuestItem() : ACollectableItem()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 }
 
 // Called when the game starts or when spawned
@@ -42,8 +43,20 @@ UObject* AQuestItem::Clone()
 	
 	SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	auto NewQuestItem = GetWorld()->SpawnActor<AQuestItem>(SpawnLocation, SpawnRotation, SpawnParameters);
-	NewQuestItem->MissionID = this->MissionID;
+	NewQuestItem->InitializeItem(StaticMeshComponent->GetStaticMesh(), StaticMeshComponent->GetMaterial(0), MissionID, IsStackable);
 	
 	return NewQuestItem;
+}
+
+void AQuestItem::InitializeItem(UStaticMesh* Mesh, UMaterialInterface* Material, const FName& MissionId, const bool& bIsStackable)
+{
+	if(IsInitialized) return;
+	
+	StaticMeshComponent->SetStaticMesh(Mesh);
+	StaticMeshComponent->SetMaterial(0, Material);
+	MissionID = MissionId;
+	this->IsStackable = bIsStackable;
+
+	IsInitialized = true;
 }
 

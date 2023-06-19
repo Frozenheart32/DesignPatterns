@@ -4,13 +4,27 @@
 
 #include "CoreMinimal.h"
 #include "ItemBuilder.h"
+#include "CreationalPatterns/AbstractFactory/ItemInfo.h"
 #include "FirstAidBuilder.generated.h"
 
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class DESIGNPATTERNS_API UFirstAidBuilder : public UItemBuilder
 {
 	GENERATED_BODY()
+
+	
+public:
+
+	UFirstAidBuilder();
+
+private:
+
+	TArray<TEnumAsByte<EFirstAidType>> AidTypes;
+	
+public:
+	
+	virtual ACollectableItem* Build(const FVector& Position, const FRotator& Rotation) override;
 };

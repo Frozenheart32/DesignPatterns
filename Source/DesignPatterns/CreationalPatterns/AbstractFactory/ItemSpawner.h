@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ItemFactory.h"
+#include "ItemInfo.h"
 #include "GameFramework/Actor.h"
 #include "ItemSpawner.generated.h"
 
@@ -15,6 +17,11 @@ public:
 	// Sets default values for this actor's properties
 	AItemSpawner();
 
+private:
+
+	UPROPERTY(EditInstanceOnly, meta = (AllowPrivateAccess), Category = "Spawner Settings")
+	TSubclassOf<ACollectableItem> ItemType;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -22,4 +29,6 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void SpawnItem();
 };

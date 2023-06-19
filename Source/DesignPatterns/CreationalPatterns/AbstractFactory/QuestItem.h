@@ -6,6 +6,7 @@
 #include "CollectableItem.h"
 #include "QuestItem.generated.h"
 
+
 UCLASS()
 class DESIGNPATTERNS_API AQuestItem : public ACollectableItem
 {
@@ -22,6 +23,9 @@ protected:
 private:
 	
 	FName MissionID;
+	bool IsStackable;
+
+	bool IsInitialized = false;
 
 public:
 	// Called every frame
@@ -29,4 +33,7 @@ public:
 
 	virtual void GiveUp(AActor* Actor) override;
 	virtual UObject* Clone() override;
+
+	UFUNCTION(BlueprintCallable)
+	void InitializeItem(UStaticMesh* Mesh, UMaterialInterface* Material, const FName& MissionId, const bool& bIsStackable);
 };
