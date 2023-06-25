@@ -21,11 +21,9 @@ bool UMyGameInstance::TryGetFirstAidInfo(EFirstAidType FirstAidType, FFirstAidIn
 	{
 		return false;
 	}
-
-	TEnumAsByte<EFirstAidType> EnumVar = FirstAidType;
+	
 	FText MyEnumValueText{};
-
-	UEnum::GetDisplayValueAsText(EnumVar, MyEnumValueText);
+	UEnum::GetDisplayValueAsText(FirstAidType, MyEnumValueText);
 	FString RowNameStr = MyEnumValueText.ToString();
 	
 	const FName RowName{RowNameStr};

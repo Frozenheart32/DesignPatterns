@@ -22,7 +22,7 @@ public:
 
 private:
 
-	TArray<TEnumAsByte<EFirstAidType>> AidTypes;
+	TArray<EFirstAidType> AidTypes;
 	
 public:
 	

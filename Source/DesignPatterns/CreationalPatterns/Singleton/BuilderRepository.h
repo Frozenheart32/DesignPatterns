@@ -11,7 +11,7 @@ class ACollectableItem;
 class UMyGameInstance;
 
 /**
- * 
+ * this Singleton and FlyWeight
  */
 UCLASS()
 class DESIGNPATTERNS_API UBuilderRepository : public UObject
@@ -24,6 +24,7 @@ private:
 
 	
 	bool Initialized = false;
+	//FlyWeight component
 	TMap<UClass*, UItemBuilder*> ItemBuilders;
 
 public:
@@ -36,6 +37,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Builder Repository")
 	void Initialize(UMyGameInstance* MyGameInstance);
+
+	//FlyWeight component
 	UFUNCTION(BlueprintCallable, Category = "Builder Repository")
 	UItemBuilder* TryGetItemBuilder(TSubclassOf<ACollectableItem> ItemType, bool& Result);
 };
